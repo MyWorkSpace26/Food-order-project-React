@@ -5,7 +5,7 @@ import CartIcon from "../Cart/CartIcon";
 
 const HeaderCartButton = (props) => {
   return (
-    <button className={clases.button}>
+    <button className={clases.button} onClick={props.onClick}>
       {/* icon cart */}
       <span className={clases.icon}>
         <CartIcon />

@@ -1,3 +1,5 @@
+import MealItemForm from "./MealItemForm";
+
 import clases from "./MealItem.module.css";
 const MealItem = (props) => {
   //to output this formattedprice with two decimal places
@@ -10,7 +12,9 @@ const MealItem = (props) => {
         <div className={clases.price}>{price}</div>
       </div>
 
-      <div></div>
+      <div>
+        <MealItemForm />
+      </div>
     </li>
   );
 };

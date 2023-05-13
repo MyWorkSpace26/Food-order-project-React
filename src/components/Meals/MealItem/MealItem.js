@@ -11,7 +11,6 @@ const MealItem = (props) => {
         <div className={clases.description}>{props.description}</div>
         <div className={clases.price}>{price}</div>
       </div>
-
       <div>
         <MealItemForm />
       </div>

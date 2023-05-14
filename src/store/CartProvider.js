@@ -24,6 +24,8 @@ const cartReduser = (state, action) => {
         items: updatedItems,
         totalAmount: updatedTotalAmount,
       };
+    default:
+      return state;
   }
 };
 

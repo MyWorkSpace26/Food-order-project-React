@@ -13,20 +13,33 @@ const defaultCartState = {
 };
 
 const cartReduser = (state, action) => {
-  switch (action.type) {
-    case addCart:
-      /* Example, i will change */
-      /* concat unlike push, it doesn't edit the existing array but return a new array */
-      const updatedItems = state.items.concat(action.item);
-      const updatedTotalAmount =
-        state.totalAmount + action.item.price * action.item.amount;
-      return {
-        items: updatedItems,
-        totalAmount: updatedTotalAmount,
+  if (action.type === addCart) {
+    const updatedTotalAmount =
+      state.totalAmount + action.item.price * action.item.amount;
+
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    const existingCartItem = state.items[existingCartItemIndex];
+    let updatedItems;
+
+    if (existingCartItem) {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
       };
-    default:
-      return state;
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    } else {
+      updatedItems = state.items.concat(action.item);
+    }
+
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
   }
+  return defaultCartState;
 };
 
 const CartProvider = (props) => {

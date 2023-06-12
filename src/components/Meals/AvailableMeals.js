@@ -58,11 +58,11 @@ const AvailableMeals = () => {
   let content = <p>Found no meals.</p>;
 
   if (isLoading) {
-    content = <p>Loading...</p>;
+    content = <p className={clases.MealsLoading}>Loading...</p>;
   }
 
   if (error) {
-    content = <p>{error}</p>;
+    content = <p className={clases["MealsError"]}>{error}</p>;
   }
 
   if (meals.length > 0) {

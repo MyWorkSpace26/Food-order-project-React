@@ -6,6 +6,7 @@ import CartContext from "./cart-context";
 
 const addCart = "ADD";
 const deleteCart = "REMOVE";
+const clearCart = "CLEAR";
 
 const defaultCartState = {
   items: [],
@@ -61,6 +62,10 @@ const cartReduser = (state, action) => {
     };
   }
 
+  if (action.type === clearCart) {
+    return defaultCartState;
+  }
+
   return defaultCartState;
 };
 
@@ -75,6 +80,9 @@ const CartProvider = (props) => {
   const removeItemFromCartHandler = (id) => {
     dispatchCartAction({ type: deleteCart, id: id });
   };
+  const clearCartHandler = () => {
+    dispatchCartAction({ type: clearCart });
+  };
 
   /*this will be the concrete context value through which will also be updated over time.*/
   const cartContext = {
@@ -82,6 +90,7 @@ const CartProvider = (props) => {
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler,
   };
   return (
     <CartContext.Provider value={cartContext}>
